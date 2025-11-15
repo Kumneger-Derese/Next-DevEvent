@@ -4,6 +4,7 @@ import BookEvent from '@/components/BookEvent'
 import { IEvent } from '@/database/eventModel'
 import { getSimilarEventsBySlug } from '@/lib/actions/eventActions'
 import EventCard from '@/components/EventCard'
+import { cacheLife } from 'next/cache'
 
 type ParamsType = {
     params: Promise<{ slug: string }>
@@ -38,6 +39,8 @@ const EventTags = ({ tags }: { tags: string[] }) => (
     </div>
 )
 const EventDetail = async ({ params }: ParamsType) => {
+    'use cache'
+    cacheLife('minutes')
 
     const { slug } = await params
     const bookings = 10
@@ -115,7 +118,7 @@ const EventDetail = async ({ params }: ParamsType) => {
                             <p className='text-sm'>Be the first to book your spot!</p>
                         )}
 
-                        <BookEvent />
+                        <BookEvent eventId={event._id} slug={event.slug} />
                     </div>
                 </aside>
             </div>
