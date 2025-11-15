@@ -6,9 +6,6 @@ import { getSimilarEventsBySlug } from '@/lib/actions/eventActions'
 import EventCard from '@/components/EventCard'
 import { cacheLife } from 'next/cache'
 
-type ParamsType = {
-  params: Promise<string>
-}
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
@@ -38,12 +35,13 @@ const EventTags = ({ tags }: { tags: string[] }) => (
     }
   </div>
 )
-const EventDetailComponent = async ({ params }: ParamsType) => {
+const EventDetailComponent = async ({ params }: { params: Promise<string> }) => {
   'use cache'
   cacheLife('minutes')
 
   const slug = await params
   const bookings = 10
+
   let event
 
   try {

@@ -1,5 +1,5 @@
-import EventDetailComponent from "@/components/EventDetails";
 import { Suspense } from "react";
+import EventDetailComponent from "@/components/EventDetails";
 
 type ParamsType = {
     params: Promise<{ slug: string }>
