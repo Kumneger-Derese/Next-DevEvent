@@ -1,10 +1,19 @@
-import type {NextConfig} from "next";
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-    reactCompiler:true,
-    experimental: {
-        turbopackFileSystemCacheForDev: true,
-    }
+  cacheComponents: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
+  },
+  reactCompiler: true,
+  experimental: {
+    turbopackFileSystemCacheForDev: true,
+  },
 };
 
 export default nextConfig;
